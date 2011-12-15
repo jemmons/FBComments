@@ -1,0 +1,346 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		730A7DEA1498575C007EA689 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A7DE91498575C007EA689 /* CommentCell.xib */; };
+		7321997E149999F800ABA2A0 /* Facebook+Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = 7321997D149999F800ABA2A0 /* Facebook+Comments.m */; };
+		73D7263B147C999100E9BC3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263A147C999100E9BC3C /* UIKit.framework */; };
+		73D7263D147C999100E9BC3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263C147C999100E9BC3C /* Foundation.framework */; };
+		73D7263F147C999100E9BC3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263E147C999100E9BC3C /* CoreGraphics.framework */; };
+		73D72647147C999100E9BC3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D72646147C999100E9BC3C /* main.m */; };
+		73D7264B147C999100E9BC3C /* MCMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D7264A147C999100E9BC3C /* MCMAppDelegate.m */; };
+		73D7264E147C999100E9BC3C /* MCMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D7264D147C999100E9BC3C /* MCMViewController.m */; };
+		73D72663147C9A1100E9BC3C /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D7265A147C9A1100E9BC3C /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		73D72664147C9A1100E9BC3C /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73D7265C147C9A1100E9BC3C /* FBDialog.bundle */; };
+		73D72665147C9A1100E9BC3C /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D7265E147C9A1100E9BC3C /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		73D72666147C9A1100E9BC3C /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D72660147C9A1100E9BC3C /* FBLoginDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		73D72667147C9A1100E9BC3C /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D72662147C9A1100E9BC3C /* FBRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		73D7266A147C9C1800E9BC3C /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D72669147C9C1800E9BC3C /* constants.m */; };
+		73D7266E147CA0F700E9BC3C /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D7266D147CA0F700E9BC3C /* MainView.xib */; };
+		73D72671147CA1B200E9BC3C /* MCMFacebookCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D72670147CA1B200E9BC3C /* MCMFacebookCommentsView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		730A7DE91498575C007EA689 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		7321997C149999F800ABA2A0 /* Facebook+Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Facebook+Comments.h"; sourceTree = "<group>"; };
+		7321997D149999F800ABA2A0 /* Facebook+Comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Facebook+Comments.m"; sourceTree = "<group>"; };
+		73D72636147C999100E9BC3C /* FBComments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBComments.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73D7263A147C999100E9BC3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		73D7263C147C999100E9BC3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		73D7263E147C999100E9BC3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		73D72642147C999100E9BC3C /* FBComments-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBComments-Info.plist"; sourceTree = "<group>"; };
+		73D72646147C999100E9BC3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73D72648147C999100E9BC3C /* FBComments-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FBComments-Prefix.pch"; sourceTree = "<group>"; };
+		73D72649147C999100E9BC3C /* MCMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMAppDelegate.h; sourceTree = "<group>"; };
+		73D7264A147C999100E9BC3C /* MCMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCMAppDelegate.m; sourceTree = "<group>"; };
+		73D7264C147C999100E9BC3C /* MCMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMViewController.h; sourceTree = "<group>"; };
+		73D7264D147C999100E9BC3C /* MCMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCMViewController.m; sourceTree = "<group>"; };
+		73D72659147C9A1100E9BC3C /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		73D7265A147C9A1100E9BC3C /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
+		73D7265B147C9A1100E9BC3C /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		73D7265C147C9A1100E9BC3C /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
+		73D7265D147C9A1100E9BC3C /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		73D7265E147C9A1100E9BC3C /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
+		73D7265F147C9A1100E9BC3C /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		73D72660147C9A1100E9BC3C /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
+		73D72661147C9A1100E9BC3C /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		73D72662147C9A1100E9BC3C /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		73D72668147C9A9000E9BC3C /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		73D72669147C9C1800E9BC3C /* constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = constants.m; sourceTree = "<group>"; };
+		73D7266D147CA0F700E9BC3C /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		73D7266F147CA1B200E9BC3C /* MCMFacebookCommentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMFacebookCommentsView.h; sourceTree = "<group>"; };
+		73D72670147CA1B200E9BC3C /* MCMFacebookCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMFacebookCommentsView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73D72633147C999100E9BC3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D7263B147C999100E9BC3C /* UIKit.framework in Frameworks */,
+				73D7263D147C999100E9BC3C /* Foundation.framework in Frameworks */,
+				73D7263F147C999100E9BC3C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7321997A1499999600ABA2A0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7321997C149999F800ABA2A0 /* Facebook+Comments.h */,
+				7321997D149999F800ABA2A0 /* Facebook+Comments.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		73D7262B147C999000E9BC3C = {
+			isa = PBXGroup;
+			children = (
+				73D72640147C999100E9BC3C /* FBComments */,
+				73D72639147C999100E9BC3C /* Frameworks */,
+				73D72637147C999100E9BC3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		73D72637147C999100E9BC3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73D72636147C999100E9BC3C /* FBComments.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73D72639147C999100E9BC3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73D7263A147C999100E9BC3C /* UIKit.framework */,
+				73D7263C147C999100E9BC3C /* Foundation.framework */,
+				73D7263E147C999100E9BC3C /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73D72640147C999100E9BC3C /* FBComments */ = {
+			isa = PBXGroup;
+			children = (
+				73D72649147C999100E9BC3C /* MCMAppDelegate.h */,
+				73D7264A147C999100E9BC3C /* MCMAppDelegate.m */,
+				73D7266C147CA05C00E9BC3C /* Views */,
+				73D7266B147CA05800E9BC3C /* Controllers */,
+				7321997A1499999600ABA2A0 /* Categories */,
+				73D72657147C99DF00E9BC3C /* Other */,
+			);
+			path = FBComments;
+			sourceTree = "<group>";
+		};
+		73D72657147C99DF00E9BC3C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				73D72668147C9A9000E9BC3C /* constants.h */,
+				73D72669147C9C1800E9BC3C /* constants.m */,
+				73D72642147C999100E9BC3C /* FBComments-Info.plist */,
+				73D72646147C999100E9BC3C /* main.m */,
+				73D72648147C999100E9BC3C /* FBComments-Prefix.pch */,
+				73D72658147C9A1100E9BC3C /* Facebook */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		73D72658147C9A1100E9BC3C /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				73D72659147C9A1100E9BC3C /* Facebook.h */,
+				73D7265A147C9A1100E9BC3C /* Facebook.m */,
+				73D7265B147C9A1100E9BC3C /* FBConnect.h */,
+				73D7265C147C9A1100E9BC3C /* FBDialog.bundle */,
+				73D7265D147C9A1100E9BC3C /* FBDialog.h */,
+				73D7265E147C9A1100E9BC3C /* FBDialog.m */,
+				73D7265F147C9A1100E9BC3C /* FBLoginDialog.h */,
+				73D72660147C9A1100E9BC3C /* FBLoginDialog.m */,
+				73D72661147C9A1100E9BC3C /* FBRequest.h */,
+				73D72662147C9A1100E9BC3C /* FBRequest.m */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
+		73D7266B147CA05800E9BC3C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				73D7264C147C999100E9BC3C /* MCMViewController.h */,
+				73D7264D147C999100E9BC3C /* MCMViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		73D7266C147CA05C00E9BC3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73D7266D147CA0F700E9BC3C /* MainView.xib */,
+				73D7266F147CA1B200E9BC3C /* MCMFacebookCommentsView.h */,
+				73D72670147CA1B200E9BC3C /* MCMFacebookCommentsView.m */,
+				730A7DE91498575C007EA689 /* CommentCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73D72635147C999100E9BC3C /* FBComments */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73D72654147C999100E9BC3C /* Build configuration list for PBXNativeTarget "FBComments" */;
+			buildPhases = (
+				73D72632147C999100E9BC3C /* Sources */,
+				73D72633147C999100E9BC3C /* Frameworks */,
+				73D72634147C999100E9BC3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FBComments;
+			productName = FBComments;
+			productReference = 73D72636147C999100E9BC3C /* FBComments.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73D7262D147C999100E9BC3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Journey Corps";
+			};
+			buildConfigurationList = 73D72630147C999100E9BC3C /* Build configuration list for PBXProject "FBComments" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 73D7262B147C999000E9BC3C;
+			productRefGroup = 73D72637147C999100E9BC3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73D72635147C999100E9BC3C /* FBComments */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73D72634147C999100E9BC3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D72664147C9A1100E9BC3C /* FBDialog.bundle in Resources */,
+				73D7266E147CA0F700E9BC3C /* MainView.xib in Resources */,
+				730A7DEA1498575C007EA689 /* CommentCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73D72632147C999100E9BC3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D72647147C999100E9BC3C /* main.m in Sources */,
+				73D7264B147C999100E9BC3C /* MCMAppDelegate.m in Sources */,
+				73D7264E147C999100E9BC3C /* MCMViewController.m in Sources */,
+				73D7266A147C9C1800E9BC3C /* constants.m in Sources */,
+				73D72663147C9A1100E9BC3C /* Facebook.m in Sources */,
+				73D72665147C9A1100E9BC3C /* FBDialog.m in Sources */,
+				73D72666147C9A1100E9BC3C /* FBLoginDialog.m in Sources */,
+				73D72667147C9A1100E9BC3C /* FBRequest.m in Sources */,
+				73D72671147CA1B200E9BC3C /* MCMFacebookCommentsView.m in Sources */,
+				7321997E149999F800ABA2A0 /* Facebook+Comments.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		73D72652147C999100E9BC3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "FBComments/Other/FBComments-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "FBComments/Other/FBComments-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		73D72653147C999100E9BC3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREFIX_HEADER = "FBComments/Other/FBComments-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "FBComments/Other/FBComments-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73D72655147C999100E9BC3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		73D72656147C999100E9BC3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73D72630147C999100E9BC3C /* Build configuration list for PBXProject "FBComments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D72652147C999100E9BC3C /* Debug */,
+				73D72653147C999100E9BC3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73D72654147C999100E9BC3C /* Build configuration list for PBXNativeTarget "FBComments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D72655147C999100E9BC3C /* Debug */,
+				73D72656147C999100E9BC3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 73D7262D147C999100E9BC3C /* Project object */;
+}
