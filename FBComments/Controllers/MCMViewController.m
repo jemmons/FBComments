@@ -4,12 +4,13 @@
 
 @interface MCMViewController () <FBRequestDelegate>
 @property (strong) Facebook *facebook;
-@property (strong, nonatomic) NSArray *comments;
+@property (strong, nonatomic, setter = primitiveSetComments:) NSArray *comments;
 @end
 
 
 @implementation MCMViewController
-@synthesize facebook, comments = _comments;
+@synthesize commentsView;
+@synthesize facebook, comments;
 
 -(id)initWithFacebook:(Facebook *)aFacebook{
 	if((self = [super initWithNibName:@"MainView" bundle:nil])){
@@ -19,15 +20,16 @@
 }
 
 
-#pragma mark - ACCESSORS
--(NSArray *)comments{
-	if(nil == _comments){
-		[[self facebook] fetchCommentsForURL:[NSURL URLWithString:@"http://web.graphicly.com/action-lab-entertainment/princeless/1"] delegate:self];
-		//Will return «nil».
-	}
-	return _comments;
+-(void)viewDidLoad{
+	[[self facebook] fetchCommentsForURL:[NSURL URLWithString:@"http://web.graphicly.com/action-lab-entertainment/princeless/1"] delegate:self];
 }
 
+
+#pragma mark - ACCESSORS
+-(void)setComments:(NSArray *)someComments{
+	[self primitiveSetComments:someComments];
+	[[self commentsView] reload:self];
+}
 
 #pragma mark - COMMENTS DATASOURCE
 -(NSUInteger)numberOfComments:(MCMFacebookCommentsView *)commentsView{
@@ -48,7 +50,7 @@
 
 #pragma mark - FACEBOOK DELEGATE
 -(void)request:(FBRequest *)request didLoad:(id)result{
-	NSLog(@"Result! %@", result);
+	[self setComments:result];
 }
 
 @end

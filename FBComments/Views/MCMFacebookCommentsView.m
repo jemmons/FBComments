@@ -81,6 +81,11 @@ static NSString * const kCommentCell = @"MCMCommentCell";
 
 
 #pragma mark - ACTIONS
+-(IBAction)reload:(id)sender{
+	[[self tableView] reloadData];
+}
+
+
 -(IBAction)authenticateButtonTapped:(id)sender{
 	if([[self delegate] respondsToSelector:@selector(commentsViewDidRequestAuthentication:)]){
 		[[self delegate] commentsViewDidRequestAuthentication:self];	
