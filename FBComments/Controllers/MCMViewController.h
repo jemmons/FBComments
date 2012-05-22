@@ -1,9 +1,6 @@
-#import "MCMFacebookCommentsView.h"
-
 @class Facebook;
 
-@interface MCMViewController : UIViewController <MCMFacebookCommentsDataSource, MCMFacebookCommentsDelegate>
-@property (weak) IBOutlet MCMFacebookCommentsView *commentsView;
+@interface MCMViewController : UIViewController
 
 -(id)initWithFacebook:(Facebook *)aFacebook;
 
