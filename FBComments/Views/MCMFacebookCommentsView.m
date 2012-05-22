@@ -1,5 +1,6 @@
 #import "MCMFacebookCommentsView.h"
 
+#import "MCMCommentCell.h"
 #import "constants.h"
 
 static const CGFloat authenticateButtonHeight = 44.0f;
@@ -36,11 +37,10 @@ static NSString * const kCommentCell = @"MCMCommentCell";
 	UITableView *aTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
 	[aTableView setDelegate:self];
 	[aTableView setDataSource:self];
+  [aTableView setRowHeight:70.0f];
 	[self setTableView:aTableView];
 	[self addSubview:[self tableView]];
 	[[self tableView] registerNib:[UINib nibWithNibName:@"CommentCell" bundle:nil] forCellReuseIdentifier:kCommentCell];
-	
-	[self reloadButtons];
 	
 	[self setFacebookDidLogInObserver:[[NSNotificationCenter defaultCenter] addObserverForName:MCMFacebookDidLogInNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 		[self reloadButtons];
@@ -80,6 +80,12 @@ static NSString * const kCommentCell = @"MCMCommentCell";
 }
 
 
+#pragma mark - ACCESSORS
+-(void)setDataSource:(id<MCMFacebookCommentsDataSource>)aDataSource{
+  dataSource = aDataSource;
+  [self reloadButtons];
+}
+
 #pragma mark - ACTIONS
 -(IBAction)reload:(id)sender{
 	[[self tableView] reloadData];
@@ -106,9 +112,11 @@ static NSString * const kCommentCell = @"MCMCommentCell";
 
 
 -(UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-	UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:kCommentCell];
+	MCMCommentCell *cell = [aTableView dequeueReusableCellWithIdentifier:kCommentCell];
+  [[cell label] setText:@"foo"];
 	return cell;
 }
+
 
 #pragma mark - PRIVATE
 -(void)reloadButtons{	
@@ -118,7 +126,11 @@ static NSString * const kCommentCell = @"MCMCommentCell";
 
 
 -(BOOL)isAuthenticated{
-	return [[self dataSource] respondsToSelector:@selector(commentsViewIsAuthenticated:)] && [[self dataSource] commentsViewIsAuthenticated:self];
+  BOOL isAuthenticated = NO;
+  if([[self dataSource] respondsToSelector:@selector(commentsViewIsAuthenticated:)]){
+    isAuthenticated = [[self dataSource] commentsViewIsAuthenticated:self];
+  }
+	return isAuthenticated;
 }
 
 @end

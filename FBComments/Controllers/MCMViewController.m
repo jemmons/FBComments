@@ -4,7 +4,7 @@
 
 @interface MCMViewController () <FBRequestDelegate>
 @property (strong) Facebook *facebook;
-@property (strong, nonatomic, setter = primitiveSetComments:) NSArray *comments;
+@property (copy) NSArray *comments;
 @end
 
 
@@ -15,6 +15,7 @@
 -(id)initWithFacebook:(Facebook *)aFacebook{
 	if((self = [super initWithNibName:@"MainView" bundle:nil])){
 		[self setFacebook:aFacebook];
+    [self addObserver:self forKeyPath:@"comments" options:0 context:NULL];
 	}
 	return self;
 }
@@ -25,11 +26,20 @@
 }
 
 
-#pragma mark - ACCESSORS
--(void)setComments:(NSArray *)someComments{
-	[self primitiveSetComments:someComments];
-	[[self commentsView] reload:self];
+-(void)dealloc{
+  [self removeObserver:self forKeyPath:@"comments"];
 }
+
+
+#pragma mark - KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+  if([@"comments" isEqualToString:keyPath]){
+    [[self commentsView] reload:self];
+  } else{
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
+}
+
 
 #pragma mark - COMMENTS DATASOURCE
 -(NSUInteger)numberOfComments:(MCMFacebookCommentsView *)commentsView{
@@ -50,7 +60,8 @@
 
 #pragma mark - FACEBOOK DELEGATE
 -(void)request:(FBRequest *)request didLoad:(id)result{
-	[self setComments:result];
+  //NSLog(@"result: %@", [[result objectAtIndex:0] objectForKey:@"fql_result_set"]);
+  [self setComments:[[result objectAtIndex:0] objectForKey:@"fql_result_set"]];
 }
 
 @end

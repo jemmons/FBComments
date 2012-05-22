@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		730A7DEA1498575C007EA689 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A7DE91498575C007EA689 /* CommentCell.xib */; };
 		7321997E149999F800ABA2A0 /* Facebook+Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = 7321997D149999F800ABA2A0 /* Facebook+Comments.m */; };
+		73C803DB156AE4AB00A13461 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73C803DA156AE4AB00A13461 /* avatar.jpg */; };
+		73C803DF156AE6E500A13461 /* MCMCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C803DE156AE6E500A13461 /* MCMCommentCell.m */; };
 		73D7263B147C999100E9BC3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263A147C999100E9BC3C /* UIKit.framework */; };
 		73D7263D147C999100E9BC3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263C147C999100E9BC3C /* Foundation.framework */; };
 		73D7263F147C999100E9BC3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D7263E147C999100E9BC3C /* CoreGraphics.framework */; };
@@ -29,6 +31,9 @@
 		730A7DE91498575C007EA689 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		7321997C149999F800ABA2A0 /* Facebook+Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Facebook+Comments.h"; sourceTree = "<group>"; };
 		7321997D149999F800ABA2A0 /* Facebook+Comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Facebook+Comments.m"; sourceTree = "<group>"; };
+		73C803DA156AE4AB00A13461 /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
+		73C803DD156AE6E500A13461 /* MCMCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMCommentCell.h; sourceTree = "<group>"; };
+		73C803DE156AE6E500A13461 /* MCMCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMCommentCell.m; sourceTree = "<group>"; };
 		73D72636147C999100E9BC3C /* FBComments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBComments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D7263A147C999100E9BC3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		73D7263C147C999100E9BC3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -123,6 +128,7 @@
 		73D72657147C99DF00E9BC3C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				73C803DA156AE4AB00A13461 /* avatar.jpg */,
 				73D72668147C9A9000E9BC3C /* constants.h */,
 				73D72669147C9C1800E9BC3C /* constants.m */,
 				73D72642147C999100E9BC3C /* FBComments-Info.plist */,
@@ -165,6 +171,8 @@
 				73D7266D147CA0F700E9BC3C /* MainView.xib */,
 				73D7266F147CA1B200E9BC3C /* MCMFacebookCommentsView.h */,
 				73D72670147CA1B200E9BC3C /* MCMFacebookCommentsView.m */,
+				73C803DD156AE6E500A13461 /* MCMCommentCell.h */,
+				73C803DE156AE6E500A13461 /* MCMCommentCell.m */,
 				730A7DE91498575C007EA689 /* CommentCell.xib */,
 			);
 			path = Views;
@@ -224,6 +232,7 @@
 				73D72664147C9A1100E9BC3C /* FBDialog.bundle in Resources */,
 				73D7266E147CA0F700E9BC3C /* MainView.xib in Resources */,
 				730A7DEA1498575C007EA689 /* CommentCell.xib in Resources */,
+				73C803DB156AE4AB00A13461 /* avatar.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +253,7 @@
 				73D72667147C9A1100E9BC3C /* FBRequest.m in Sources */,
 				73D72671147CA1B200E9BC3C /* MCMFacebookCommentsView.m in Sources */,
 				7321997E149999F800ABA2A0 /* Facebook+Comments.m in Sources */,
+				73C803DF156AE6E500A13461 /* MCMCommentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

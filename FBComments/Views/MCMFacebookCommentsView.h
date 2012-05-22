@@ -16,7 +16,7 @@
 
 @interface MCMFacebookCommentsView : UIView <UITableViewDelegate, UITableViewDataSource>
 @property (weak) IBOutlet id<MCMFacebookCommentsDelegate> delegate;
-@property (weak) IBOutlet id<MCMFacebookCommentsDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<MCMFacebookCommentsDataSource> dataSource;
 
 -(IBAction)reload:(id)sender;
 
