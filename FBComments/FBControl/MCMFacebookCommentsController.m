@@ -1,5 +1,6 @@
 #import "MCMFacebookCommentsController.h"
 
+#import "Facebook.h"
 #import "MCMFacebookCommentsViewController.h"
 
 @interface MCMFacebookCommentsController ()
@@ -7,8 +8,8 @@
 
 @implementation MCMFacebookCommentsController
 
-+(id)commentsController{
-  MCMFacebookCommentsViewController *aViewController = [[MCMFacebookCommentsViewController alloc] init];
++(id)commentsControllerWithURL:(NSURL *)aURL andFacebookObject:(Facebook*)aFacebookObject{
+  MCMFacebookCommentsViewController *aViewController = [[MCMFacebookCommentsViewController alloc] initWithURL:aURL andFacebook:aFacebookObject];
   MCMFacebookCommentsController *commentsController = [[MCMFacebookCommentsController alloc] initWithRootViewController:aViewController];
   return commentsController;
 }

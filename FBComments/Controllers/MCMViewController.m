@@ -18,44 +18,20 @@
 -(id)initWithFacebook:(Facebook *)aFacebook{
 	if((self = [super initWithNibName:@"MainView" bundle:nil])){
 		[self setFacebook:aFacebook];
-    [self addObserver:self forKeyPath:@"comments" options:0 context:NULL];
 	}
 	return self;
 }
 
 
 -(void)viewDidLoad{
-  [self setCommentsController:[MCMFacebookCommentsController commentsController]];
-  [[[self commentsController] view] setFrame:CGRectMake(20.0f, 20.0f, 320.0f, 480.0f)];
+  [self setCommentsController:[MCMFacebookCommentsController commentsControllerWithURL:[NSURL URLWithString:@"http://web.graphicly.com/action-lab-entertainment/princeless/1"] andFacebookObject:facebook]];
+  [[[self commentsController] view] setFrame:CGRectMake(20.0f, 20.0f, 500.0f, 480.0f)];
+  [[[self commentsController] view] setAutoresizingMask:UIViewAutoresizingNone];
   [[self view] addSubview:[[self commentsController] view]];
-//	[[self facebook] fetchCommentsForURL:[NSURL URLWithString:@"http://web.graphicly.com/action-lab-entertainment/princeless/1"] delegate:self];
-}
-
-
--(void)dealloc{
-  [self removeObserver:self forKeyPath:@"comments"];
 }
 
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
   return YES;
 }
-
-
-#pragma mark - KVO
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-//  if([@"comments" isEqualToString:keyPath]){
-//    [[self commentsView] reload:self];
-//  } else{
-//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-//  }
-}
-
-
-#pragma mark - FACEBOOK DELEGATE
--(void)request:(FBRequest *)request didLoad:(id)result{
-  //NSLog(@"result: %@", [[result objectAtIndex:0] objectForKey:@"fql_result_set"]);
-  [self setComments:[[result objectAtIndex:0] objectForKey:@"fql_result_set"]];
-}
-
 @end

@@ -1,3 +1,5 @@
+@class Facebook;
+
 @interface MCMFacebookCommentsController : UINavigationController
-+(id)commentsController;
++(id)commentsControllerWithURL:(NSURL *)aURL andFacebookObject:(Facebook*)aFacebookObject;
 @end
