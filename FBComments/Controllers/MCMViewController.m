@@ -24,7 +24,8 @@
 
 
 -(void)viewDidLoad{
-  [self setCommentsController:[MCMFacebookCommentsController commentsControllerWithURL:[NSURL URLWithString:@"http://web.graphicly.com/action-lab-entertainment/princeless/1"] andFacebookObject:facebook]];
+  MCMFacebookCommentsController *aCommentsController = [[MCMFacebookCommentsController alloc] initWithURL:[NSURL URLWithString:@"http://skia.net"/*@"http://web.graphicly.com/action-lab-entertainment/princeless/1"*/] andFacebookObject:facebook];
+  [self setCommentsController:aCommentsController];
   [[[self commentsController] view] setFrame:CGRectMake(20.0f, 20.0f, 500.0f, 480.0f)];
   [[[self commentsController] view] setAutoresizingMask:UIViewAutoresizingNone];
   [[self view] addSubview:[[self commentsController] view]];

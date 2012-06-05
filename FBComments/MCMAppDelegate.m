@@ -11,12 +11,7 @@
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
 
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   [self setFacebook:[[Facebook alloc] initWithAppId:MCMFacebookAppID andDelegate:self]];
-  if([userDefaults objectForKey:MCMFacebookAccessTokenKey] && [userDefaults objectForKey:MCMFacebookExpirationDateKey]){
-    [[self facebook] setAccessToken:[userDefaults objectForKey:MCMFacebookAccessTokenKey]];
-    [[self facebook] setExpirationDate:[userDefaults objectForKey:MCMFacebookExpirationDateKey]];
-  }
 	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	// Override point for customization after application launch.
@@ -75,10 +70,6 @@
 
 #pragma mark - FACEBOOK DELEGATES
 -(void)fbDidLogin{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:[facebook accessToken] forKey:MCMFacebookAccessTokenKey];
-	[defaults setObject:[facebook expirationDate] forKey:MCMFacebookExpirationDateKey];
-	[defaults synchronize];
 	[[NSNotificationCenter defaultCenter] postNotificationName:MCMFacebookDidLogInNotification object:[self facebook]];
 }
 

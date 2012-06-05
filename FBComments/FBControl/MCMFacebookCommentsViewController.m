@@ -2,18 +2,17 @@
 
 #import "MCMComment.h"
 #import "MCMCommentCell.h"
+#import "MCMDetailViewController.h"
 #import "Facebook.h"
 #import "Facebook+Comments.h"
 
 static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell identifier";
 
 @interface MCMFacebookCommentsViewController ()
-@property (weak) UITableView *tableView;
-@property (weak) UIButton *authenticateButton;
 @property (copy, nonatomic) NSArray *comments;
 
-@property (strong) id facebookDidLogInObserver;
-@property (strong) id commentDidUpdateDataObserver;
+@property (weak) id facebookDidLogInObserver;
+@property (weak) id commentDidUpdateDataObserver;
 
 -(IBAction)authenticateButtonTapped:(id)sender;
 -(void)reloadButtons;
@@ -22,7 +21,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 
 @implementation MCMFacebookCommentsViewController
 @synthesize commentsURL, facebook;
-@synthesize tableView, authenticateButton, comments;
+@synthesize comments;
 @synthesize facebookDidLogInObserver, commentDidUpdateDataObserver;
 
 -(id)initWithURL:(NSURL *)aCommentsURL andFacebook:(Facebook *)aFacebook{
@@ -34,43 +33,17 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 }
 
 -(void)loadView{
-  UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
+  UITableView *aView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f) style:UITableViewStylePlain];
   [aView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+  [aView setDelegate:self];
+  [aView setDataSource:self];
+  [aView setRowHeight:70.0f];
+  [aView registerNib:[UINib nibWithNibName:@"CommentCell" bundle:nil] forCellReuseIdentifier:kCommentCellIdentifier];
   [self setView:aView];
 }
 
 
 -(void)viewDidLoad{  
-  CGRect bounds = [[self view] bounds];
-  CGFloat commentHeight = 64.0f;
-  CGRect commentsFrame = CGRectMake(0.0f, 0.0f, bounds.size.width, bounds.size.height - commentHeight);
-  CGRect replyFrame = CGRectMake(0.0f, CGRectGetMaxY(commentsFrame), bounds.size.width, commentHeight);
-
-  [[self view] setBackgroundColor:[UIColor redColor]];
-  UIView *commentView = [[UIView alloc] initWithFrame:replyFrame];
-  [commentView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth];
-  [commentView setBackgroundColor:[UIColor blueColor]];
-  [[self view] addSubview:commentView];
-  
-  
-//	UIButton *aButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//	[aButton setTitle:@"Authenticate" forState:UIControlStateNormal];
-//	[aButton addTarget:self action:@selector(authenticateButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-//  [aButton setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
-//	[aButton setHidden:NO];
-//  [self setAuthenticateButton:aButton]; //weak
-//	[[self view] addSubview:[self authenticateButton]];
-	
-	UITableView *aTableView = [[UITableView alloc] initWithFrame:commentsFrame style:UITableViewStylePlain];
-	[aTableView setDelegate:self];
-	[aTableView setDataSource:self];
-  [aTableView setRowHeight:70.0f];
-  [aTableView setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-  //TODO: Remove this dependency on an external nib.
-  [aTableView registerNib:[UINib nibWithNibName:@"CommentCell" bundle:nil] forCellReuseIdentifier:kCommentCellIdentifier];
-	[self setTableView:aTableView]; //weak
-	[[self view] addSubview:[self tableView]];
-	
 //	[self setFacebookDidLogInObserver:[[NSNotificationCenter defaultCenter] addObserverForName:MCMFacebookDidLogInNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 //		[self reloadButtons];
 //	}]];
@@ -79,7 +52,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
     MCMComment *updatedComment = [note object];
     NSUInteger updatedIndex = [[self comments] indexOfObject:updatedComment];
     NSIndexPath *updatedIndexPath = [NSIndexPath indexPathForRow:updatedIndex inSection:0];
-    MCMCommentCell *cell = (MCMCommentCell *)[[self tableView] cellForRowAtIndexPath:updatedIndexPath];
+    MCMCommentCell *cell = (MCMCommentCell *)[(UITableView *)[self view] cellForRowAtIndexPath:updatedIndexPath];
     if(cell){
       [[cell image] setImage:[updatedComment profileImage]];
     }
@@ -89,6 +62,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 }
 
 -(void)viewDidUnload{
+  [[NSNotificationCenter defaultCenter] removeObserver:[self commentDidUpdateDataObserver]];
 //  [[NSNotificationCenter defaultCenter] removeObserver:[self facebookDidLogInObserver]];
 //  [self setFacebookDidLogInObserver:nil];
 }
@@ -97,7 +71,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 #pragma mark - ACCESSORS
 -(void)setComments:(NSArray *)someComments{
   comments = someComments;
-  [[self tableView] reloadData];
+  [(UITableView *)[self view] reloadData];
 }
 
 
@@ -130,6 +104,13 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
   [[cell image] setImage:[comment profileImage]];
   [cell setIndented:[comment isIndented]];
 	return cell;
+}
+
+
+-(void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  UIViewController *detailViewController = [[MCMDetailViewController alloc] initWithComment:[[self comments] objectAtIndex:[indexPath row]]];
+  [[self navigationController] pushViewController:detailViewController animated:YES];
+  [aTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -174,7 +155,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 
 
 -(void)reloadButtons{	
-	[[self authenticateButton] setHidden:[self isAuthenticated]];
+//	[[self authenticateButton] setHidden:[self isAuthenticated]];
 }
 
 
