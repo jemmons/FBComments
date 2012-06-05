@@ -3,13 +3,17 @@
 #import "Facebook.h"
 #import "MCMFacebookCommentsViewController.h"
 
-static const CGFloat kPostHeight = 72.0f;
+static const CGFloat kSmallPostHeight = 47.0f;
+static const CGFloat kLargePostHeight = 147.0f;
 
 @interface MCMFacebookCommentsController ()
 @property (strong) UINavigationController *navigationController;
+-(void)expandPost;
+-(void)shrinkPost;
 @end
 
 @implementation MCMFacebookCommentsController
+@synthesize textView, postView;
 @synthesize navigationController;
 
 -(id)initWithURL:(NSURL *)aURL andFacebookObject:(Facebook *)aFacebookObject{
@@ -25,12 +29,19 @@ static const CGFloat kPostHeight = 72.0f;
 
 -(void)viewDidLoad{
   [super viewDidLoad];
-  [[self view] setClipsToBounds:YES];
+  [[self textView] setDelegate:self];
   
+  [[self view] setClipsToBounds:YES];
   CGRect bounds = [[self view] bounds];
-  bounds.size.height -= kPostHeight;
+  bounds.size.height -= kSmallPostHeight;
   [[[self navigationController] view] setFrame:bounds];
-  [[self view] addSubview:[[self navigationController] view]];
+  [[self view] insertSubview:[[self navigationController] view] belowSubview:[self postView]];
+}
+
+
+-(void)viewDidUnload{
+  [[self textView] setDelegate:nil];
+  [super viewDidUnload];
 }
 
 
@@ -53,5 +64,38 @@ static const CGFloat kPostHeight = 72.0f;
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
   return YES;
 }
+
+
+#pragma mark - TEXT VIEW DELEGATE
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+  [self expandPost];
+  return YES;
+}
+
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView{
+  [self shrinkPost];
+  return YES;
+}
+
+
+#pragma mark - PRIVATE
+-(void)shrinkPost{
+  CGRect frame = [[self postView] frame];
+  frame.origin.y = CGRectGetMaxY(frame)-kSmallPostHeight;
+  frame.size.height = kSmallPostHeight;
+  [[self postView] setFrame:frame];
+}
+
+
+-(void)expandPost{
+  CGRect frame = [[self postView] frame];
+  NSLog(@"view: %@", [self postView]);
+  NSLog(@"frame %@", NSStringFromCGRect(frame));
+  frame.origin.y = CGRectGetMaxY(frame) - kLargePostHeight;
+  frame.size.height = kLargePostHeight;
+  [[self postView] setFrame:frame];
+}
+
 
 @end
