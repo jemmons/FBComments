@@ -1,10 +1,9 @@
 #import "MCMFacebookCommentsViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "MCMComment.h"
 #import "MCMCommentCell.h"
 #import "MCMDetailViewController.h"
-#import "Facebook.h"
-#import "Facebook+Comments.h"
 
 static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell identifier";
 
@@ -14,19 +13,19 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 @property (weak) id facebookDidLogInObserver;
 @property (weak) id commentDidUpdateDataObserver;
 
+-(void)fetchCommentsForURL:(NSURL*)aURL;
 -(IBAction)authenticateButtonTapped:(id)sender;
 -(void)reloadButtons;
 -(NSArray *)mergeFacebookQuery:(NSArray *)oneThing with:(NSArray *)anotherThing;
 @end
 
 @implementation MCMFacebookCommentsViewController
-@synthesize commentsURL, facebook;
+@synthesize commentsURL;
 @synthesize comments;
 @synthesize facebookDidLogInObserver, commentDidUpdateDataObserver;
 
--(id)initWithURL:(NSURL *)aCommentsURL andFacebook:(Facebook *)aFacebook{
+-(id)initWithURL:(NSURL *)aCommentsURL{
   if((self = [super initWithNibName:nil bundle:nil])){
-    [self setFacebook:aFacebook];
     [self setCommentsURL:aCommentsURL];
   }
   return self;
@@ -58,8 +57,9 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
     }
   }]];
   
-  [[self facebook] fetchCommentsForURL:[self commentsURL] delegate:self];
+  [self fetchCommentsForURL:[self commentsURL]];
 }
+
 
 -(void)viewDidUnload{
   [[NSNotificationCenter defaultCenter] removeObserver:[self commentDidUpdateDataObserver]];
@@ -114,11 +114,20 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 }
 
 
-#pragma mark - FACEBOOK DELEGATE
--(void)request:(FBRequest *)request didLoad:(id)result{
-  NSArray *fbComments = [[result objectAtIndex:0] objectForKey:@"fql_result_set"];
-  NSArray *fbUsers = [[result objectAtIndex:1] objectForKey:@"fql_result_set"];
-  [self setComments:[self mergeFacebookQuery:fbComments with:fbUsers]];
+#pragma mark - FACEBOOK STUFF
+-(void)fetchCommentsForURL:(NSURL*)aURL{
+  NSString* fql = [NSString stringWithFormat:@"{\"comments\":\"SELECT fromid, text, time, comments FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url ='%@')\", \"users\":\"SELECT name, id FROM profile WHERE id IN (SELECT fromid FROM #comments)\"}", aURL];
+
+  [FBRequestConnection startWithGraphPath:@"/fql" parameters:@{@"queries":fql} HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    if (error) {
+      NSLog(@"Error: %@", [error localizedDescription]);
+    } else {
+      NSLog(@"Result: %@", result);
+      //  NSArray *fbComments = [[result objectAtIndex:0] objectForKey:@"fql_result_set"];
+      //  NSArray *fbUsers = [[result objectAtIndex:1] objectForKey:@"fql_result_set"];
+      //  [self setComments:[self mergeFacebookQuery:fbComments with:fbUsers]];
+    }
+  }];
 }
 
 

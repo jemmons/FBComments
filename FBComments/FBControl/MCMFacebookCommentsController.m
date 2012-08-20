@@ -1,6 +1,5 @@
 #import "MCMFacebookCommentsController.h"
 
-#import "Facebook.h"
 #import "MCMFacebookCommentsViewController.h"
 
 static const CGFloat kSmallPostHeight = 47.0f;
@@ -16,9 +15,9 @@ static const CGFloat kLargePostHeight = 147.0f;
 @synthesize textView, postView;
 @synthesize navigationController;
 
--(id)initWithURL:(NSURL *)aURL andFacebookObject:(Facebook *)aFacebookObject{
+-(id)initWithURL:(NSURL *)aURL{
   if((self = [super initWithNibName:@"CommentsView" bundle:nil])){
-    MCMFacebookCommentsViewController *aViewController = [[MCMFacebookCommentsViewController alloc] initWithURL:aURL andFacebook:aFacebookObject];
+    MCMFacebookCommentsViewController *aViewController = [[MCMFacebookCommentsViewController alloc] initWithURL:aURL];
     UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:aViewController];
     [aNavigationController setDelegate:self];
     [self setNavigationController:aNavigationController];

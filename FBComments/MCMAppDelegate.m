@@ -7,15 +7,13 @@
 
 @implementation MCMAppDelegate
 
-@synthesize window, viewController, facebook;
+@synthesize window, viewController;
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-
-  [self setFacebook:[[Facebook alloc] initWithAppId:MCMFacebookAppID andDelegate:self]];
 	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	// Override point for customization after application launch.
-	self.viewController = [[MCMViewController alloc] initWithFacebook:facebook];
+	self.viewController = [[MCMViewController alloc] init];
 	self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];
 	return YES;
@@ -23,7 +21,8 @@
 
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  return [[self facebook] handleOpenURL:url]; 
+//  return [[self facebook] handleOpenURL:url];
+  return YES;
 }
 
 
@@ -70,7 +69,7 @@
 
 #pragma mark - FACEBOOK DELEGATES
 -(void)fbDidLogin{
-	[[NSNotificationCenter defaultCenter] postNotificationName:MCMFacebookDidLogInNotification object:[self facebook]];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:MCMFacebookDidLogInNotification object:[self facebook]];
 }
 
 @end
