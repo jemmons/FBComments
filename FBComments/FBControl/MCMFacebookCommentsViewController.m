@@ -20,9 +20,6 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 @end
 
 @implementation MCMFacebookCommentsViewController
-@synthesize commentsURL;
-@synthesize comments;
-@synthesize facebookDidLogInObserver, commentDidUpdateDataObserver;
 
 -(id)initWithURL:(NSURL *)aCommentsURL{
   if((self = [super initWithNibName:nil bundle:nil])){
@@ -70,7 +67,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 
 #pragma mark - ACCESSORS
 -(void)setComments:(NSArray *)someComments{
-  comments = someComments;
+  _comments = someComments;
   [(UITableView *)[self view] reloadData];
 }
 
@@ -116,7 +113,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 
 #pragma mark - FACEBOOK STUFF
 -(void)fetchCommentsForURL:(NSURL*)aURL{
-  NSString* fql = [NSString stringWithFormat:@"{\"comments\":\"SELECT fromid, text, time, comments FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url ='%@')\", \"users\":\"SELECT name, id FROM profile WHERE id IN (SELECT fromid FROM #comments)\"}", aURL];
+  NSString* fql = [NSString stringWithFormat:@"{\"comments\":\"SELECT fromid, text, time, comments, likes FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url ='%@')\", \"users\":\"SELECT name, id FROM profile WHERE id IN (SELECT fromid FROM #comments)\"}", aURL];
 
   [FBRequestConnection startWithGraphPath:@"/fql" parameters:@{@"q":fql} HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
     if (error) {
@@ -124,6 +121,7 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
     } else {
       NSArray *fbComments = result[@"data"][0][@"fql_result_set"];
       NSArray *fbUsers = result[@"data"][1][@"fql_result_set"];
+      NSLog(@"comments:\n%@", fbComments);
       [self setComments:[self mergeFacebookQuery:fbComments with:fbUsers]];
     }
   }];
