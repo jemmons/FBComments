@@ -1,4 +1,5 @@
 #import "MCMAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "MCMViewController.h"
 
@@ -10,7 +11,12 @@
 @synthesize window, viewController;
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-	
+  if ([[FBSession activeSession] state] == FBSessionStateCreatedOpening) {
+    [[FBSession activeSession] close];
+  }
+  
+  [FBSession openActiveSessionWithAllowLoginUI:NO];
+  
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	// Override point for customization after application launch.
 	self.viewController = [[MCMViewController alloc] init];
@@ -21,8 +27,7 @@
 
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-//  return [[self facebook] handleOpenURL:url];
-  return YES;
+  return [[FBSession activeSession] handleOpenURL:url];
 }
 
 
@@ -60,6 +65,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+  [[FBSession activeSession] close];
+  
 	/*
 	 Called when the application is about to terminate.
 	 Save data if appropriate.

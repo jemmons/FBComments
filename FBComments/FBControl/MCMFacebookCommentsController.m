@@ -1,4 +1,5 @@
 #import "MCMFacebookCommentsController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "MCMFacebookCommentsViewController.h"
 
@@ -7,13 +8,14 @@ static const CGFloat kLargePostHeight = 147.0f;
 
 @interface MCMFacebookCommentsController ()
 @property (strong) UINavigationController *navigationController;
+@property (weak) id sessionDidBecomeClosedObserver;
+@property (weak) id sessionDidBecomeOpenObserver;
 -(void)expandPost;
 -(void)shrinkPost;
+-(void)updateConnected:(BOOL)isConnected;
 @end
 
 @implementation MCMFacebookCommentsController
-@synthesize textView, postView;
-@synthesize navigationController;
 
 -(id)initWithURL:(NSURL *)aURL{
   if((self = [super initWithNibName:@"CommentsView" bundle:nil])){
@@ -35,10 +37,22 @@ static const CGFloat kLargePostHeight = 147.0f;
   bounds.size.height -= kSmallPostHeight;
   [[[self navigationController] view] setFrame:bounds];
   [[self view] insertSubview:[[self navigationController] view] belowSubview:[self postView]];
+  
+  [self updateConnected:[[FBSession activeSession] isOpen]];
+  
+  [self setSessionDidBecomeOpenObserver:[[NSNotificationCenter defaultCenter] addObserverForName:FBSessionDidBecomeOpenActiveSessionNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [self updateConnected:YES];
+  }]];
+
+  [self setSessionDidBecomeClosedObserver:[[NSNotificationCenter defaultCenter] addObserverForName:FBSessionDidBecomeClosedActiveSessionNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [self updateConnected:NO];
+  }]];
 }
 
 
 -(void)viewDidUnload{
+  [[NSNotificationCenter defaultCenter] removeObserver:[self sessionDidBecomeClosedObserver]];
+  [[NSNotificationCenter defaultCenter] removeObserver:[self sessionDidBecomeOpenObserver]];
   [[self textView] setDelegate:nil];
   [super viewDidUnload];
 }
@@ -96,5 +110,17 @@ static const CGFloat kLargePostHeight = 147.0f;
   [[self postView] setFrame:frame];
 }
 
+
+-(void)updateConnected:(BOOL)isConnected{
+  if(isConnected){
+    [[self connectButton] setHidden:YES];
+    [[self postButton] setHidden:NO];
+  } else{
+    [[self connectButton] setHidden:NO];
+    [[self postButton] setHidden:YES];
+  }
+  
+  
+}
 
 @end

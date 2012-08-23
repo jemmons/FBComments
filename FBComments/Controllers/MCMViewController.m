@@ -1,4 +1,5 @@
 #import "MCMViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "MCMFacebookCommentsController.h"
 #import "MCMFacebookCommentsViewController.h"
@@ -31,5 +32,10 @@
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
   return YES;
+}
+
+
+-(IBAction)tapped:(id)sender {
+  [FBSession openActiveSessionWithAllowLoginUI:YES];
 }
 @end

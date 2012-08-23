@@ -118,14 +118,13 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
 -(void)fetchCommentsForURL:(NSURL*)aURL{
   NSString* fql = [NSString stringWithFormat:@"{\"comments\":\"SELECT fromid, text, time, comments FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url ='%@')\", \"users\":\"SELECT name, id FROM profile WHERE id IN (SELECT fromid FROM #comments)\"}", aURL];
 
-  [FBRequestConnection startWithGraphPath:@"/fql" parameters:@{@"queries":fql} HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+  [FBRequestConnection startWithGraphPath:@"/fql" parameters:@{@"q":fql} HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
     if (error) {
       NSLog(@"Error: %@", [error localizedDescription]);
     } else {
-      NSLog(@"Result: %@", result);
-      //  NSArray *fbComments = [[result objectAtIndex:0] objectForKey:@"fql_result_set"];
-      //  NSArray *fbUsers = [[result objectAtIndex:1] objectForKey:@"fql_result_set"];
-      //  [self setComments:[self mergeFacebookQuery:fbComments with:fbUsers]];
+      NSArray *fbComments = result[@"data"][0][@"fql_result_set"];
+      NSArray *fbUsers = result[@"data"][1][@"fql_result_set"];
+      [self setComments:[self mergeFacebookQuery:fbComments with:fbUsers]];
     }
   }];
 }
@@ -136,17 +135,16 @@ static NSString * const kCommentCellIdentifier = @"MCM Facebook comment cell ide
   NSMutableArray *newComments = [NSMutableArray arrayWithCapacity:[someComments count]];
   
   [someComments enumerateObjectsUsingBlock:^(id aComment, NSUInteger idx, BOOL *stop) {
-    NSDictionary *aUser = [someUsers objectAtIndex:idx];
+    NSDictionary *aUser = someUsers[idx];
     
     MCMComment *newComment = [[MCMComment alloc] init];
-    [newComment setName:[aUser objectForKey:@"name"]];
-    [newComment setComment:[aComment objectForKey:@"text"]];
-    NSString *urlString = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", [aUser valueForKey:@"id"]];
+    [newComment setName:aUser[@"name"]];
+    [newComment setComment:aComment[@"text"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", aUser[@"id"]];
     [newComment setProfileImageURL:[NSURL URLWithString:urlString]];
     [newComments addObject:newComment];
     
-    NSDictionary *replies = [aComment objectForKey:@"comments"];
-    //Goofy JSONness here. «comments» is sometimes a dictionary. But sometimes it's also an empty array. Both dictionaries and arrays respond to «count», so we're testing with that.
+    id replies = aComment[@"comments"];
     if([replies count]){
       [[replies objectForKey:@"data"] enumerateObjectsUsingBlock:^(id aReply, NSUInteger idx, BOOL *stop) {
         MCMComment *newReply = [[MCMComment alloc] init];
